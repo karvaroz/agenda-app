@@ -4,41 +4,41 @@ import { Link } from "react-router-dom"
 
 const RegisterPage = () => {
 	return (
-		<div class="content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
+		<div className="content">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-6">
 						<img
 							src={RegisterImg}
 							alt="Image"
-							class="img-fluid"
+							className="img-fluid"
 						/>
 					</div>
-					<div class="col-md-6 contents">
-						<div class="row justify-content-center">
-							<div class="col-md-8">
-								<div class="mb-4">
+					<div className="col-md-6 contents">
+						<div className="row justify-content-center">
+							<div className="col-md-8">
+								<div className="mb-4">
 									<h3>Registrarte</h3>
-									<p class="mb-4">
+									<p className="mb-4">
 										Crea una cuenta, ingresando los siguientes datos
 									</p>
 								</div>
 								<form
 									action="#"
 									method="post">
-									<div class="form-group first">
-										<label for="username">Usuario</label>
+									<div className="form-group first">
+										<label htmlFor="username">Usuario</label>
 										<input
 											type="text"
-											class="form-control"
+											className="form-control"
 											id="username"
 										/>
 									</div>
-									<div class="form-group last mb-4">
-										<label for="password">Contraseña</label>
+									<div className="form-group last mb-4">
+										<label htmlFor="password">Contraseña</label>
 										<input
 											type="password"
-											class="form-control"
+											className="form-control"
 											id="password"
 										/>
 									</div>
@@ -46,11 +46,16 @@ const RegisterPage = () => {
 									<input
 										type="submit"
 										value="Log In"
-										class="btn btn-block btn-primary"
+										className="btn btn-block btn-primary"
 									/>
 									<Link to="/login">
-										<span class="d-block text-left my-4 text-muted">
+										<span className="d-block text-left my-4 text-muted">
 											&mdash; ¿Ya tienes una cuenta? Ingresa &mdash;
+										</span>
+									</Link>
+									<Link to="/">
+										<span className="d-block text-left my-4 text-muted">
+											&mdash; Inicio &mdash;
 										</span>
 									</Link>
 								</form>

@@ -2,7 +2,7 @@ import React from "react";
 
 import LoginImg from "../../assets/login.svg";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
 	return (
@@ -29,7 +29,7 @@ const LoginPage = () => {
 									action="#"
 									method="post">
 									<div className="form-group first">
-										<label for="username">Correo</label>
+										<label htmlFor="username">Correo</label>
 										<input
 											type="text"
 											className="form-control"
@@ -37,7 +37,7 @@ const LoginPage = () => {
 										/>
 									</div>
 									<div className="form-group last mb-4">
-										<label for="password">Contraseña</label>
+										<label htmlFor="password">Contraseña</label>
 										<input
 											type="password"
 											className="form-control"
@@ -51,7 +51,12 @@ const LoginPage = () => {
 									/>
 									<Link to="/register">
 										<span className="d-block text-left my-4 text-muted">
-											¿No tienes cuenta? Registrate
+											&mdash; ¿No tienes cuenta? Registrate &mdash;
+										</span>
+									</Link>
+									<Link to="/">
+										<span className="d-block text-left my-4 text-muted">
+											&mdash; Inicio &mdash;
 										</span>
 									</Link>
 								</form>
