@@ -1,8 +1,10 @@
 import React from 'react'
+import Navbar from "../../components/Navbar/Navbar";
+
 
 const AgendaPage = () => {
   return (
-    <div>AgendaPage</div>
+    <Navbar />
   )
 }
 
