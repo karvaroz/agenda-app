@@ -1,13 +1,14 @@
 import "./ModalBox.css";
 
 import Modal from "react-modal";
-import { useState } from "react";
-import { addHours } from "date-fns";
+import { useState, useMemo } from "react";
+import { addHours, differenceInSeconds } from "date-fns";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
+import Swal from "sweetalert2";
 
-registerLocale("es", es)
+registerLocale("es", es);
 
 const customStyles = {
 	content: {
@@ -23,6 +24,9 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const ModalBox = () => {
+	const [isOpen, setIsOpen] = useState(true);
+	const [formSubmitted, setFormSubmitted] = useState(false);
+
 	const [formValues, setFormValues] = useState({
 		title: "Esto es un evento de prueba",
 		notes: "Para ver si funciona",
@@ -34,6 +38,11 @@ const ModalBox = () => {
 			name: "Karina",
 		},
 	});
+
+	const titleClassName = useMemo(() => {
+		if (!formSubmitted) return "";
+		return formValues.title.length > 0 ? "is-valid" : "is-invalid";
+	}, [formValues.title, formSubmitted]);
 
 	const handleInputChange = ({ target }) => {
 		setFormValues({
@@ -50,10 +59,23 @@ const ModalBox = () => {
 	};
 
 	const closeModal = () => {
-		console.log("cerrar");
+		setIsOpen(false);
 	};
 	const modalIsOpen = () => {
-		console.log("abierto");
+		setIsOpen(true);
+	};
+	const onSubmit = (e) => {
+		e.preventDefault();
+		setFormSubmitted(true);
+		const difference = differenceInSeconds(formValues.end, formValues.start);
+		if (isNaN(difference) || difference <= 0) {
+			Swal.fire("Fechas Incorrectas", "Revisar las fechas ingresadas", "error");
+			return;
+		}
+		if (formValues.title.length <= 0) {
+			return;
+		}
+		console.log(formValues);
 	};
 
 	return (
@@ -66,7 +88,9 @@ const ModalBox = () => {
 			closeTimeoutMS={200}>
 			<h1> Nuevo evento </h1>
 			<hr />
-			<form className="container">
+			<form
+				className="container"
+				onSubmit={onSubmit}>
 				<div className="form-group mb-2">
 					<label>Fecha y hora inicio</label>
 					<DatePicker
@@ -93,13 +117,12 @@ const ModalBox = () => {
 						timeCaption="Hora"
 					/>
 				</div>
-
 				<hr />
 				<div className="form-group mb-2">
 					<label>Titulo y notas</label>
 					<input
 						type="text"
-						className="form-control"
+						className={`form-control ${titleClassName}`}
 						placeholder="Título del evento"
 						name="title"
 						autoComplete="off"
